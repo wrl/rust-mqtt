@@ -19,7 +19,7 @@ mod packet;
 mod encode;
 mod decode;
 
-pub use proto::QoS;
+pub use proto::{QoS, ClientId};
 pub use topic::{Level, Topic, TopicTree, MatchTopic};
 pub use packet::{Packet, LastWill, ConnectReturnCode, SubscribeReturnCode};
 pub use encode::WritePacketExt;

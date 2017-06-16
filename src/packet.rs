@@ -1,4 +1,4 @@
-use proto::{Protocol, QoS};
+use proto::{Protocol, QoS, PacketId};
 
 bitflags! {
     pub flags ConnectFlags: u8 {
@@ -126,54 +126,54 @@ pub enum Packet<'a> {
         /// the information channel to which payload data is published.
         topic: &'a str,
         /// only present in PUBLISH Packets where the QoS level is 1 or 2.
-        packet_id: Option<u16>,
+        packet_id: Option<PacketId>,
         /// the Application Message that is being published.
         payload: &'a [u8],
     },
     /// Publish acknowledgment
     PublishAck {
         /// Packet Identifier
-        packet_id: u16,
+        packet_id: PacketId,
     },
     /// Publish received (assured delivery part 1)
     PublishReceived {
         /// Packet Identifier
-        packet_id: u16,
+        packet_id: PacketId,
     },
     /// Publish release (assured delivery part 2)
     PublishRelease {
         /// Packet Identifier
-        packet_id: u16,
+        packet_id: PacketId,
     },
     /// Publish complete (assured delivery part 3)
     PublishComplete {
         /// Packet Identifier
-        packet_id: u16,
+        packet_id: PacketId,
     },
     /// Client subscribe request
     Subscribe {
         /// Packet Identifier
-        packet_id: u16,
+        packet_id: PacketId,
         /// the list of Topic Filters and QoS to which the Client wants to subscribe.
         topic_filters: Vec<(&'a str, QoS)>,
     },
     /// Subscribe acknowledgment
     SubscribeAck {
-        packet_id: u16,
+        packet_id: PacketId,
         /// corresponds to a Topic Filter in the SUBSCRIBE Packet being acknowledged.
         status: Vec<SubscribeReturnCode>,
     },
     /// Unsubscribe request
     Unsubscribe {
         /// Packet Identifier
-        packet_id: u16,
+        packet_id: PacketId,
         /// the list of Topic Filters that the Client wishes to unsubscribe from.
         topic_filters: Vec<&'a str>,
     },
     /// Unsubscribe acknowledgment
     UnsubscribeAck {
         /// Packet Identifier
-        packet_id: u16,
+        packet_id: PacketId,
     },
     /// PING request
     PingRequest,
