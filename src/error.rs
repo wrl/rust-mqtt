@@ -15,6 +15,7 @@ error_chain!{
     }
 }
 
+/*
 impl<T> From<::rotor::SpawnError<T>> for Error {
     fn from(err: ::rotor::SpawnError<T>) -> Self {
         match err {
@@ -31,3 +32,4 @@ impl<T> From<::rotor::SpawnError<T>> for Error {
         }
     }
 }
+*/
